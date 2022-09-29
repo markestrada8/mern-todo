@@ -4,7 +4,7 @@ import axios from 'axios'
 import { CredentialsContext } from '../App'
 import './Register.css'
 
-export default function Register() {
+export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [, setCredentials] = useContext(CredentialsContext)
@@ -13,9 +13,9 @@ export default function Register() {
 
   const navigate = useNavigate()
 
-  const register = (event) => {
+  const login = (event) => {
     event.preventDefault()
-    axios.post('http://localhost:4000/register', { username: username, password: password })
+    axios.post('http://localhost:4000/login', { username: username, password: password })
       .then((response) => {
         setCredentials({
           username,
@@ -31,9 +31,10 @@ export default function Register() {
 
   return (
     <div className='register'>
-      <h1>Register</h1>
-      <form onSubmit={register}>
+      <h1>Login</h1>
+      <form onSubmit={login}>
         <h2>{error && error}</h2>
+
         <input
           placeholder='username'
           value={username}
@@ -47,7 +48,7 @@ export default function Register() {
           onChange={(event) => {
             setPassword(event.target.value)
           }} />
-        <button type='submit'>Register</button>
+        <button type='submit'>Login</button>
       </form>
     </div>
   )
